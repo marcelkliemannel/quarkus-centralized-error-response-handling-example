@@ -3,6 +3,7 @@ package dev.turincomplete.quarkuscentralizederrorresponsehandlingexample.globale
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.quarkus.arc.Priority;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 import org.jboss.resteasy.core.ResteasyContext;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Provider
+@Priority(9999)
 public class ErrorPageResponseFilter implements ContainerResponseFilter {
   // -- Class Fields ------------------------------------------------------------------------------------------------ //
 
