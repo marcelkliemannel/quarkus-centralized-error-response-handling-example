@@ -8,6 +8,9 @@ import io.quarkus.qute.Template;
 import io.quarkus.resteasy.runtime.standalone.VertxUtil;
 import io.vertx.core.http.HttpServerRequest;
 import org.jboss.logging.Logger;
+import org.jboss.resteasy.core.ResteasyContext;
+import org.jboss.resteasy.plugins.server.servlet.ResteasyContextParameters;
+import org.jboss.resteasy.spi.ResteasyDeployment;
 import org.jboss.resteasy.util.MediaTypeHelper;
 
 import javax.inject.Inject;
@@ -39,6 +42,14 @@ public class ErrorPageResponseExceptionMapper implements ExceptionMapper<Excepti
   Logger logger;
 
   // -- Initialization ---------------------------------------------------------------------------------------------- //
+
+  public ErrorPageResponseExceptionMapper() {
+    // Avoid the full replacement of the HTML error page with HTML entities for
+    // bad request responses. The Qute template engine will handle this for us.
+    ResteasyContext.getContextData(ResteasyDeployment.class)
+                   .setProperty(ResteasyContextParameters.RESTEASY_DISABLE_HTML_SANITIZER, true);
+  }
+
   // -- Exposed Methods --------------------------------------------------------------------------------------------- //
 
   @Inject

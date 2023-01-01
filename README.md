@@ -17,10 +17,14 @@ If we now call the endpoint `http://localhost:8080/bad-request`, we can see that
 Error 403 (Forbidden)
 
 Action not allowed.
+```
 
+```shell
 > curl --header "Accept: application/json" http://localhost:8080/forbidden
 [{"status":403,"title":"Forbidden","detail":"Action not allowed."}]
+```
 
+```shell
 > curl --header "Accept: text/html" http://localhost:8080/forbidden
 <!doctype html>
 <html lang="en">
