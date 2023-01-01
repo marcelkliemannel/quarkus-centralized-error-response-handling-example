@@ -27,8 +27,7 @@ import java.util.Optional;
 public class ErrorPageResponseFilter implements ContainerResponseFilter {
   // -- Class Fields ------------------------------------------------------------------------------------------------ //
 
-  private static final List<MediaType> ERROR_MEDIA_TYPES        = List.of(MediaType.TEXT_PLAIN_TYPE, MediaType.TEXT_HTML_TYPE, MediaType.APPLICATION_JSON_TYPE);
-  private static final MediaType       DEFAULT_ERROR_MEDIA_TYPE = MediaType.TEXT_PLAIN_TYPE;
+  private static final List<MediaType> ERROR_MEDIA_TYPES = List.of(MediaType.TEXT_PLAIN_TYPE, MediaType.TEXT_HTML_TYPE, MediaType.APPLICATION_JSON_TYPE);
 
   // -- Instance Fields --------------------------------------------------------------------------------------------- //
 
@@ -66,8 +65,7 @@ public class ErrorPageResponseFilter implements ContainerResponseFilter {
   private MediaType determineErrorContentMediaType(ContainerRequestContext containerRequestContext) {
     List<MediaType> acceptableMediaTypes = containerRequestContext.getAcceptableMediaTypes();
     // Both list parameters must be a sortable collection
-    MediaType bestMatch = MediaTypeHelper.getBestMatch(new ArrayList<>(ERROR_MEDIA_TYPES), new ArrayList<>(acceptableMediaTypes));
-    return bestMatch != null ? bestMatch : DEFAULT_ERROR_MEDIA_TYPE;
+    return MediaTypeHelper.getBestMatch(new ArrayList<>(ERROR_MEDIA_TYPES), new ArrayList<>(acceptableMediaTypes));
   }
 
   private Object createErrorContent(MediaType errorMediaType, Response.StatusType errorStatus, String errorDetails) {
